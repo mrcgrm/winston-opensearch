@@ -5,15 +5,15 @@ const Transport = require('winston-transport');
 const dayjs = require('dayjs');
 const defaults = require('lodash.defaults');
 const omit = require('lodash.omit');
-const { Client } = require('@elastic/elasticsearch');
+const { Client } = require('@opensearch-project/opensearch');
 const defaultTransformer = require('./transformer');
 const BulkWriter = require('./bulk_writer');
 const mappingTemplate = require('./index-template-mapping.json');
 
-class ElasticsearchTransport extends Transport {
+class OpenSearchTransport extends Transport {
   constructor(opts) {
     super(opts);
-    this.name = 'elasticsearch';
+    this.name = 'opensearch';
     this.handleExceptions = opts.handleExceptions || false;
     this.handleRejections = opts.handleRejections || false;
     this.exitOnError = false;
@@ -175,9 +175,9 @@ class ElasticsearchTransport extends Transport {
   }
 }
 
-winston.transports.Elasticsearch = ElasticsearchTransport;
+winston.transports.OpenSearch = OpenSearchTransport;
 
 module.exports = {
-  ElasticsearchTransport,
-  ElasticsearchTransformer: defaultTransformer
+  OpenSearchTransport,
+  OpeSearchTransformer: defaultTransformer,
 };
